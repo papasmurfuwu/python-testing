@@ -48,6 +48,7 @@ def time_generator():
 
 def num_generator():
     print('Please enter integers for the following inputs.')
+    i = 0
     again_num = True
     while again_num:
         try:
@@ -59,7 +60,8 @@ def num_generator():
                 for num in range(num_digit):
                     digit = str(random.randint(1, 9))
                     generated_number += digit
-                print(generated_number)
+                formatted_number = "{:,}".format(int(generated_number))
+                print(formatted_number)
             break
 
         except ValueError as e:
