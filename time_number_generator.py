@@ -48,12 +48,34 @@ def time_generator():
 
 def num_generator():
     print('Please enter integers for the following inputs.')
+    number_words = {
+        "zero": 0,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10
+    }
     i = 0
     again_num = True
     while again_num:
         try:
-            num_digit = int(input('How many digits for each number? '))
-            num_count = int(input('How many numbers do you want? '))
+            num_digit = input('How many digits for each number? ')
+            if num_digit.isdigit():
+                num_digit = int(num_digit)
+            else:
+                num_digit = sum([number_words[word] for word in num_digit.split()])
+
+            num_count = input('How many numbers do you want? ')
+            if num_count.isdigit():
+                num_count = int(num_count)
+            else:
+                num_count = sum([number_words[x] for x in num_count.split()])
 
             for count in range(num_count):
                 generated_number = ""
@@ -83,15 +105,18 @@ if __name__ == '__main__':
 
             while True:
                 try:
-                    again = input('Would you like to use the program again (y/n)? ').strip().lower()
-                    if again == 'y':
+                    again_input = input('Would you like to use the program again (y/n)? ').strip().lower()
+                    if again_input == 'y':
                         break
 
-                    elif again == 'n':
+                    elif again_input == 'n':
                         print('Thanks for using us and have a great day!')
                         again = False
                         break
-                    break
+
+                    else:
+                        raise ValueError('Please enter y/n~~~')
+
                 except ValueError:
                     print('Please enter y/n!')
                     continue
